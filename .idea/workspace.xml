@@ -126,7 +126,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1582996829379</updated>
-      <workItem from="1582996835621" duration="6531000" />
+      <workItem from="1582996835621" duration="8519000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -149,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583074471148</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added Show table">
+      <created>1583075148899</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583075148899</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -168,29 +175,30 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated to local server, updated migration files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated to local server, updated migration files" />
+    <MESSAGE value="Added Show table" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Show table" />
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583072269458">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2" timestamp="1583074471019">
+    <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2" timestamp="1583075148727">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583074471019" />
+    <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583075148727" />
     <state x="743" y="298" width="424" height="491" key="FileChooserDialogImpl" timestamp="1583070175769">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="743" y="298" width="424" height="491" key="FileChooserDialogImpl/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583070175769" />
-    <state width="263" height="541" key="HiddenNamespacesPopup" timestamp="1583074170600">
+    <state width="263" height="541" key="HiddenNamespacesPopup" timestamp="1583076793197">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583074170600" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1583074445398">
+    <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583076793197" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1583075151232">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583074445398" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583075151232" />
     <state x="623" y="239" key="search.everywhere.popup" timestamp="1583070168986">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
