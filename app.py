@@ -12,6 +12,7 @@ import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
+from flask_migrate import Migrate
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -19,11 +20,14 @@ from forms import *
 
 app = Flask(__name__)
 moment = Moment(app)
-app.config.from_object('config')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:pass@localhost:5432/fyyur'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+migrate = Migrate(app, db)
 
-# TODO: connect to a local postgresql database
+
+# TODO: connect to a local postgresql database DONE
 
 # ----------------------------------------------------------------------------#
 # Models.
@@ -41,7 +45,7 @@ class Venue(db.Model):
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
 
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
+    # TODO: implement any missing fields, as a database migration using Flask-Migrate HALF
 
 
 class Artist(db.Model):
@@ -56,7 +60,7 @@ class Artist(db.Model):
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
 
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
+    # TODO: implement any missing fields, as a database migration using Flask-Migrate hALF
 
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
