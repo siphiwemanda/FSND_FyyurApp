@@ -41,8 +41,8 @@ class Venues(db.Model):
     address = db.Column(db.String(120))
     phone = db.Column(db.String(120))
     website = db.Column(db.String(500), nullable=True)
-    image_link = db.Column(db.String(500))
-    facebook_link = db.Column(db.String(120))
+    image_link = db.Column(db.String(500), nullable=True)
+    facebook_link = db.Column(db.String(120), nullable=True)
     seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
     seeking_description = db.Column(db.String(), nullable=True)
 
@@ -139,7 +139,6 @@ def show_venue(venue_id):
     # shows the venue page with the given venue_id
     # TODO: replace with real venue data from the venues table, using venue_id
 
-
     return render_template('pages/show_venue.html', venue=venue_id)
 
 
@@ -157,32 +156,31 @@ def create_venue_submission():
     # TODO: insert form data as a new Venue record in the db, instead
     # TODO: modify data to be the data object returned from db insertion
     error = False
-    venueId = 0
     form = VenueForm(request.form)
-    body = {};
     genres = request.form.getlist('genres')
+    venue = len(Venues.query.all())
     try:
-        venue = Venues(name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data,
-                      address=form.address.data,
-                      seeking_talent=form.seeking_talent.data, genres=genres,
-                      seeking_description=form.seeking_description.data, image_link=form.image_link.data,
-                      website=form.website.data, facebook_link=form.facebook_link.data)
+        print("hello")
+        #venue = Venues(name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data, address=form.address.data,
+          #             seeking_talent=form.seeking_talent.data, genres=genres,
+           #            seeking_description=form.seeking_description.data, image_link=form.image_link.data,
+            #           website=form.website.data, facebook_link=form.facebook_link.data)
+        venue = Venues(venue_id=venue, name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data, address=form.address.data)
+        #
         db.session.add(venue)
         db.session.commit()
-        venueId = venue.venue_id
     except:
         error = True
         db.session.rollback()
         print(sys.exc_info())
-
     finally:
         db.session.close()
     if error:
         flash('An error occurred. Venue ' + form.name.data + ' could not be listed.')
     else:
-        flash('Venue ' + form['name'].data + ' was successfully listed!')
+        flash('Venue ' + form['name'].data + ' was successfully added!')
 
-    return render_template('pages/home.html')
+    return render_template('pages/venues.html')
 
     # on successful db insert, flash success
     # flash('Venue ' + request.form['name'] + ' was successfully listed!')
@@ -232,7 +230,8 @@ def show_artist(artist_id):
     # shows the venue page with the given venue_id
     # TODO: replace with real venue data from the venues table, using venue_id
 
-    return render_template('pages/show_artist.html', artist=data)
+    artists = Artist.query.get(artist_id)
+    return render_template('pages/show_artist.html', artist=artists)
 
 
 #  Update
