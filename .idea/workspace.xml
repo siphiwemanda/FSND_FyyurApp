@@ -4,7 +4,6 @@
     <list default="true" id="86006490-a7c0-4eab-9c3e-506d36dbd688" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/show_artist.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/show_artist.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,7 +144,7 @@
       <workItem from="1585220950354" duration="11314000" />
       <workItem from="1585239745294" duration="948000" />
       <workItem from="1585241225733" duration="87000" />
-      <workItem from="1585300045241" duration="14303000" />
+      <workItem from="1585300045241" duration="17390000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -196,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585318097210</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="posting a new venue works">
+      <created>1585324031938</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1585324031938</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -221,17 +227,18 @@
     <MESSAGE value="Added real table data for venues" />
     <MESSAGE value="An actual mess" />
     <MESSAGE value="Venue half working, artist half working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Venue half working, artist half working" />
+    <MESSAGE value="posting a new venue works" />
+    <option name="LAST_COMMIT_MESSAGE" value="posting a new venue works" />
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583072269458">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1585318096826">
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1585324031762">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585318096826" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585324031762" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
@@ -291,10 +298,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583076793197" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1585318101633">
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1585324033685">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585318101633" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585324033685" />
     <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077188419" />
     <state x="474" y="308" key="com.intellij.ide.util.TipDialog" timestamp="1584975992619">
       <screen x="0" y="27" width="1920" height="1053" />
