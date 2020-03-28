@@ -14,6 +14,8 @@ from flask_migrate import Migrate
 import logging
 from logging import Formatter, FileHandler
 from flask_wtf import Form
+from sqlalchemy.sql import crud
+
 from forms import *
 import sys
 
@@ -34,7 +36,7 @@ migrate = Migrate(app, db)
 class Venues(db.Model):
     __tablename__ = 'venue'
 
-    venue_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String)
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
@@ -53,17 +55,20 @@ class Venues(db.Model):
 class Artist(db.Model):
     __tablename__ = 'artist'
 
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.String(120))
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
-    address = db.Column(db.String(120))
-    phone = db.Column(db.String(120))
+    address = db.Column(db.String(120), nullable=True)
+    phone = db.Column(db.String(120), nullable=True)
+    website = db.Column(db.String(500), nullable=True)
+    image_link = db.Column(db.String(500), nullable=True)
+    facebook_link = db.Column(db.String(120), nullable=True)
+    genres = db.Column(db.String(120))
+    seeking_description = db.Column(db.String(), nullable=True)
 
     def __repr__(self):
         return f'<Venue {self.id} {self.name}>'
-
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate hALF
 
 
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
@@ -114,32 +119,22 @@ def venues():
     #   TODO: num_shows should be aggregated based on number of upcoming shows per venue.
 
     areas = Venues.query.all()
-    return render_template('pages/venues.html', areas=areas)
+
+    return render_template('pages/venues.html', areas=areas, venues=Venues)
 
 
 @app.route('/venues/search', methods=['POST'])
 def search_venues():
     # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
-    # seach for Hop should return "The Musical Hop".
-    # search for "Music" should return "The Musical Hop" and "Park Square Live Music & Coffee"
-    response = {
-        "count": 1,
-        "data": [{
-            "id": 2,
-            "name": "The Dueling Pianos Bar",
-            "num_upcoming_shows": 0,
-        }]
-    }
-    return render_template('pages/search_venues.html', results=response,
-                           search_term=request.form.get('search_term', ''))
+    search_term = request.form.get('search_term', '')
+    venues_returned = Venues.query.filter(Venues.city.ilike('%' + search_term + '%'))
+    return render_template('pages/search_venues.html', results=venues_returned, search_term=search_term)
 
 
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
-    # shows the venue page with the given venue_id
-    # TODO: replace with real venue data from the venues table, using venue_id
-
-    return render_template('pages/show_venue.html', venue=venue_id)
+    data = Venues.query.filter(Venues.id == venue_id).first()
+    return render_template('pages/show_venue.html', venue=data)
 
 
 #  Create Venue
@@ -162,11 +157,8 @@ def create_venue_submission():
     venue += 1
     try:
         print("hello")
-        #venue = Venues(name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data, address=form.address.data,
-          #             seeking_talent=form.seeking_talent.data, genres=genres,
-           #            seeking_description=form.seeking_description.data, image_link=form.image_link.data,
-            #           website=form.website.data, facebook_link=form.facebook_link.data)
-        venue = Venues(venue_id=venue, name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data, address=form.address.data)
+        venue = Venues(id=venue, name=form.name.data, city=form.city.data, state=form.state.data,
+                       phone=form.phone.data, address=form.address.data)
         #
         db.session.add(venue)
         db.session.commit()
@@ -181,7 +173,7 @@ def create_venue_submission():
     else:
         flash('Venue ' + form['name'].data + ' was successfully added!')
 
-    return render_template('pages/venues.html')
+    return render_template('pages/home.html')
 
     # on successful db insert, flash success
     # flash('Venue ' + request.form['name'] + ' was successfully listed!')
@@ -214,25 +206,22 @@ def search_artists():
     # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
     # seach for "A" should return "Guns N Petals", "Matt Quevado", and "The Wild Sax Band".
     # search for "band" should return "The Wild Sax Band".
-    response = {
-        "count": 1,
-        "data": [{
-            "id": 4,
-            "name": "Guns N Petals",
-            "num_upcoming_shows": 0,
-        }]
-    }
-    return render_template('pages/search_artists.html', results=response,
-                           search_term=request.form.get('search_term', ''))
+    search_term = request.form.get('search_term', '')
+    artists_returned = Artist.query.filter(Artist.name.ilike('%' + search_term + '%'))
+    print(artists_returned)
+    # print(results)
+
+    return render_template('pages/search_artists.html', results=artists_returned, search_term=search_term)
 
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
     # shows the venue page with the given venue_id
     # TODO: replace with real venue data from the venues table, using venue_id
+    form = ArtistForm()
+    artist = Artist.query.filter(Artist.id == artist_id).first()
+    return render_template('pages/show_artist.html', form=form, artist=artist)
 
-    artists = Artist.query.get(artist_id)
-    return render_template('pages/show_artist.html', artist=artists)
 
 
 #  Update
@@ -307,13 +296,14 @@ def create_artist_submission():
     # called upon submitting the new artist listing form
     error = False
     form = VenueForm(request.form)
-    genres = request.form.getlist('genres')
     artist = len(Artist.query.all())
+    artist+=1
 
     try:
         print("hello")
 
-        new_artist = Artist(id=artist, name=form.name.data, city=form.city.data, state=form.state.data, phone=form.phone.data, address=form.address.data)
+        new_artist = Artist(id = artist, name=form.name.data, city=form.city.data, state=form.state.data,
+                            phone=form.phone.data, address=form.address.data)
 
         db.session.add(new_artist)
         db.session.commit()
@@ -324,9 +314,9 @@ def create_artist_submission():
     finally:
         db.session.close()
     if error:
-        flash('An error occurred. Show ' + form.name.data + ' could not be listed.')
+        flash('An error occurred. Artist ' + form.name.data + ' could not be listed.')
     else:
-        flash('Show ' + form['name'].data + ' was successfully added!')
+        flash('Artist ' + form['name'].data + ' was successfully added!')
 
     return render_template('pages/home.html')
 
