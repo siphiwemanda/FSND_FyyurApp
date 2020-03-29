@@ -48,6 +48,8 @@ class Venues(db.Model):
     seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
     seeking_description = db.Column(db.String(), nullable=True)
 
+
+
     def __repr__(self):
         return f'<Venue {self.venue_id} {self.name}>'
 
@@ -67,6 +69,8 @@ class Artist(db.Model):
     genres = db.Column(db.String(120))
     seeking_description = db.Column(db.String(), nullable=True)
 
+
+
     def __repr__(self):
         return f'<Venue {self.id} {self.name}>'
 
@@ -78,12 +82,9 @@ class Show(db.Model):
     __tablename__ = 'show'
 
     id = db.Column(db.Integer, primary_key=True)
-    city = db.Column(db.String(120))
-    state = db.Column(db.String(120))
-    phone = db.Column(db.String(120))
-    genres = db.Column(db.String(120))
-    image_link = db.Column(db.String(500))
-    facebook_link = db.Column(db.String(120))
+    start_time = db.Column(db.String(120))
+    artist_id = db.Column(db.Integer, db.ForeignKey("artist.id"), nullable=False)
+    venue_id = db.Column(db.Integer, db.ForeignKey("venue.id"), nullable=False)
 
 
 # ----------------------------------------------------------------------------#
@@ -125,7 +126,6 @@ def venues():
 
 @app.route('/venues/search', methods=['POST'])
 def search_venues():
-    # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
     search_term = request.form.get('search_term', '')
     venues_returned = Venues.query.filter(Venues.city.ilike('%' + search_term + '%'))
     return render_template('pages/search_venues.html', results=venues_returned, search_term=search_term)
