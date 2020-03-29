@@ -256,10 +256,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1585408410881">
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1585471740290">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585408410881" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585471740290" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
@@ -342,6 +342,10 @@
     <state x="337" y="225" key="com.intellij.ide.util.TipDialog/0.27.1366.741@0.27.1366.741" timestamp="1584188007224" />
     <state x="474" y="308" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1584975992619" />
     <state x="2257" y="205" key="com.intellij.ide.util.TipDialog/1920.0.1366.768/0.27.1920.1053@1920.0.1366.768" timestamp="1584193799769" />
+    <state x="726" y="468" width="467" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585471786392">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="726" y="468" width="467" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585471786392" />
     <state x="623" y="239" key="search.everywhere.popup" timestamp="1583070168986">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
