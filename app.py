@@ -33,11 +33,11 @@ migrate = Migrate(app, db)
 # Models.
 # ----------------------------------------------------------------------------#
 
-class Venues(db.Model):
+class Venues(db.Model):  ###Parent
     __tablename__ = 'venue'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String)
+    name = db.Column(db.String(120))
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
     address = db.Column(db.String(120))
@@ -47,14 +47,14 @@ class Venues(db.Model):
     facebook_link = db.Column(db.String(120), nullable=True)
     seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
     seeking_description = db.Column(db.String(), nullable=True)
-
-
+    show = db.relationship('Show', backref='venueshowlink', lazy=True)
 
     def __repr__(self):
         return f'<Venue {self.venue_id} {self.name}>'
 
 
-class Artist(db.Model):
+
+class Artist(db.Model): ###Parent
     __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -68,6 +68,7 @@ class Artist(db.Model):
     facebook_link = db.Column(db.String(120), nullable=True)
     genres = db.Column(db.String(120))
     seeking_description = db.Column(db.String(), nullable=True)
+    show = db.relationship('Show', backref='artistshowlink', lazy=True)
 
 
 
@@ -78,11 +79,14 @@ class Artist(db.Model):
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 # TODO create a foreign key that connects Show to artist and venue
 
-class Show(db.Model):
+class Show(db.Model): ###Child
     __tablename__ = 'show'
 
     id = db.Column(db.Integer, primary_key=True)
     start_time = db.Column(db.String(120))
+    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
+
 
 
 
