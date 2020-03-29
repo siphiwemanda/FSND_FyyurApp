@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 import dateutil.parser
 import babel
-from flask import Flask, abort, jsonify, render_template, request, Response, flash, redirect, url_for
+from flask import Flask, abort, jsonify, render_template, request, Response, flash, redirect, url_for, session
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import ARRAY
@@ -86,9 +86,6 @@ class Show(db.Model): ###Child
     start_time = db.Column(db.String(120))
     artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
-
-
-
 
 
 # ----------------------------------------------------------------------------#
@@ -334,8 +331,12 @@ def shows():
     # TODO: replace with real venues data.
     #       num_shows should be aggregated based on number of upcoming shows per venue.
 
-    return render_template('pages/shows.html', shows=Show.query.all())
+    #show_join = Show.query.all()
+    show_join = db.session.query(Show).join(Venues, Artist)
+    print(show_join)
 
+
+    return render_template('pages/shows.html', shows=show_join)
 
 @app.route('/shows/create')
 def create_shows():
