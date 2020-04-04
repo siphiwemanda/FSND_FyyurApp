@@ -151,7 +151,7 @@
       <workItem from="1585470323760" duration="20707000" />
       <workItem from="1585515112370" duration="99000" />
       <workItem from="1585515240083" duration="1237000" />
-      <workItem from="1586003912137" duration="8428000" />
+      <workItem from="1586003912137" duration="12713000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -286,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586010282556</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Edit form page correct to venue and artist">
+      <created>1586012662255</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1586012662255</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,18 +328,19 @@
     <MESSAGE value="Showpage, has img, artist and venue" />
     <MESSAGE value="artist page has past shows and future shows" />
     <MESSAGE value="Migration files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Migration files" />
+    <MESSAGE value="Edit form page correct to venue and artist" />
+    <option name="LAST_COMMIT_MESSAGE" value="Edit form page correct to venue and artist" />
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583072269458">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586010282429">
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586012662100">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504389263" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586010282429" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586012662100" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
@@ -404,11 +412,11 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583076793197" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586010284155">
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586012663570">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="395" y="199" key="Vcs.Push.Dialog.v2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504391073" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586010284155" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586012663570" />
     <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077188419" />
     <state x="92" y="120" width="1720" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1585471585371">
       <screen x="0" y="27" width="1920" height="1053" />
@@ -424,9 +432,10 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="726" y="468" width="467" height="177" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1585471786392" />
-    <state x="623" y="239" key="search.everywhere.popup" timestamp="1583070168986">
+    <state x="623" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1586015042934">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
+    <state x="623" y="239" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586015042934" />
     <state x="623" y="239" key="search.everywhere.popup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583070168986" />
   </component>
 </project>

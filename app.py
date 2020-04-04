@@ -344,17 +344,16 @@ def edit_artist_submission(artist_id):
     # TODO: take values from the form submitted, and update existing
     # artist record with ID <artist_id> using the new attributes
 
-    artist = Artist.query.filter_by(id=artist_id).first()
+    edit_artist = Artist.query.get(artist_id)
     error = False
     form = ArtistForm(request.form)
-    artist = len(Artist.query.all())
 
     try:
 
-        new_artist = Artist(id=artist, name=form.name.data, city=form.city.data, state=form.state.data,
+        edit_artist = Artist(name=form.name.data, city=form.city.data, state=form.state.data,
                             phone=form.phone.data)
 
-        db.session.add(new_artist)
+        db.session.add(edit_artist)
         db.session.commit()
     except:
         error = True
@@ -367,14 +366,13 @@ def edit_artist_submission(artist_id):
     else:
         flash('Artist ' + form['name'].data + ' was successfully added!')
 
-
     return redirect(url_for('show_artist', artist_id=artist_id))
 
 
 @app.route('/venues/<int:venue_id>/edit', methods=['GET'])
 def edit_venue(venue_id):
     form = VenueForm()
-    venue = Artist.query.filter_by(id=venue_id).first()
+    venue = Venues.query.filter_by(id=venue_id).first()
 
     return render_template('forms/edit_venue.html', form=form, venue=venue)
 
@@ -382,7 +380,41 @@ def edit_venue(venue_id):
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
     # TODO: take values from the form submitted, and update existing
+
     # venue record with ID <venue_id> using the new attributes
+
+    try:
+        form = VenueForm()
+        # get venue by id
+        edit_venue = Venues.query.filter_by(id=venue_id).first()
+
+        # load form data from user input
+        edit_venue.name = form.name.data
+        edit_venue.genres = form.genres.data
+        edit_venue.city = form.city.data
+        edit_venue.state = form.state.data
+        edit_venue.address = form.address.data
+        edit_venue.phone = form.phone.data
+
+        edit_venue.facebook_link = form.facebook_link.data
+        edit_venue.website = form.website.data
+        edit_venue.image_link = form.image_link.data
+        edit_venue.seeking_talent = True if form.seeking_talent.data == 'Yes' else False
+        edit_venue.seeking_description = form.seeking_description.data
+
+        # commit changes, flash message if successful
+        db.session.commit()
+        flash('Venue ' + request.form['name'] + ' was successfully updated!')
+    except:
+        # rollback session if error
+        db.session.rollback()
+        flash('An error occurred. Venue ' +
+              request.form['name'] + ' could not be listed. ' )
+
+    finally:
+        # always close the session
+        db.session.close()
+
     return redirect(url_for('show_venue', venue_id=venue_id))
 
 
