@@ -53,8 +53,7 @@ class Venues(db.Model):  ###Parent
         return f'<Venue {self.venue_id} {self.name}>'
 
 
-
-class Artist(db.Model): ###Parent
+class Artist(db.Model):  ###Parent
     __tablename__ = 'artist'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -70,8 +69,6 @@ class Artist(db.Model): ###Parent
     seeking_description = db.Column(db.String(), nullable=True)
     show = db.relationship('Show', backref='artistshowlink', lazy=True)
 
-
-
     def __repr__(self):
         return f'<Venue {self.id} {self.name}>'
 
@@ -79,7 +76,7 @@ class Artist(db.Model): ###Parent
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 # TODO create a foreign key that connects Show to artist and venue
 
-class Show(db.Model): ###Child
+class Show(db.Model):  ###Child
     __tablename__ = 'show'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -197,7 +194,6 @@ def delete_venue(venue_id):
 #  ----------------------------------------------------------------
 @app.route('/artists')
 def artists():
-    # TODO: replace with real data returned from querying the database
     artists = Artist.query.all()
     return render_template('pages/artists.html', artists=artists)
 
@@ -222,7 +218,6 @@ def show_artist(artist_id):
     form = ArtistForm()
     artist = Artist.query.filter(Artist.id == artist_id).first()
     return render_template('pages/show_artist.html', form=form, artist=artist)
-
 
 
 #  Update
@@ -298,12 +293,12 @@ def create_artist_submission():
     error = False
     form = ArtistForm(request.form)
     artist = len(Artist.query.all())
-    artist+=1
+    artist += 1
 
     try:
         print("hello")
 
-        new_artist = Artist(id = artist, name=form.name.data, city=form.city.data, state=form.state.data,
+        new_artist = Artist(id=artist, name=form.name.data, city=form.city.data, state=form.state.data,
                             phone=form.phone.data)
 
         db.session.add(new_artist)
@@ -327,16 +322,25 @@ def create_artist_submission():
 
 @app.route('/shows')
 def shows():
-    # displays list of shows at /shows
-    # TODO: replace with real venues data.
-    #       num_shows should be aggregated based on number of upcoming shows per venue.
+    #      TODO num_shows should be aggregated based on number of upcoming shows per venue.
 
-    #show_join = Show.query.all()
-    show_join = db.session.query(Show).join(Venues, Artist)
-    print(show_join)
+    Show_page = Show.query.all()
+    Data = []
+    # get venue and artist information for each show
+    for show in Show_page:
+        Data.append({
+            "venue_id": show.venue_id,
+            "venue_name": Venues.query.filter_by(id=show.venue_id).first().name,
+            "artist_id": show.artist_id,
+            "artist_name": Artist.query.filter_by(id=show.artist_id).first().name,
+            "image_link": Artist.query.filter_by(id=show.artist_id).first().image_link,
+            "start_time": format_datetime(str(show.start_time))
+        })
 
+        print(Data)
 
-    return render_template('pages/shows.html', shows=show_join)
+    return render_template('pages/shows.html', shows=Data)
+
 
 @app.route('/shows/create')
 def create_shows():
@@ -347,7 +351,6 @@ def create_shows():
 
 @app.route('/shows/create', methods=['POST'])
 def create_show_submission():
-
     error = False
     form = ShowForm(request.form)
     try:
