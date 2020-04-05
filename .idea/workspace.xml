@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="86006490-a7c0-4eab-9c3e-506d36dbd688" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/show_artist.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/show_artist.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/show_venue.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/show_venue.html" afterDir="false" />
     </list>
@@ -154,7 +153,7 @@
       <workItem from="1585515112370" duration="99000" />
       <workItem from="1585515240083" duration="1237000" />
       <workItem from="1586003912137" duration="13421000" />
-      <workItem from="1586074972528" duration="2445000" />
+      <workItem from="1586074972528" duration="3450000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -310,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586017502982</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="added edit and delete buttons to both artist and venue">
+      <created>1586077486099</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1586077486099</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,18 +353,19 @@
     <MESSAGE value="Migration files" />
     <MESSAGE value="Edit form page correct to venue and artist" />
     <MESSAGE value="edit creating new record not updating record" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit creating new record not updating record" />
+    <MESSAGE value="added edit and delete buttons to both artist and venue" />
+    <option name="LAST_COMMIT_MESSAGE" value="added edit and delete buttons to both artist and venue" />
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583072269458">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586017502893">
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586077485862">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504389263" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586017502893" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586077485862" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
@@ -430,11 +437,11 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583076793197" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586017506019">
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586077490853">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="395" y="199" key="Vcs.Push.Dialog.v2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504391073" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586017506019" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586077490853" />
     <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077188419" />
     <state x="92" y="120" width="1720" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1585471585371">
       <screen x="0" y="27" width="1920" height="1053" />
