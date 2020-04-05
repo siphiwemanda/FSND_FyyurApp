@@ -61,7 +61,7 @@ class Artist(db.Model):  ###Parent
     city = db.Column(db.String(120))
     state = db.Column(db.String(120))
     address = db.Column(db.String(120), nullable=True)
-    phone = db.Column(db.String(120), nullable=True)
+    phone = db.Column(db.String(120), nullable=False)
     website = db.Column(db.String(500), nullable=True)
     image_link = db.Column(db.String(500), nullable=True)
     facebook_link = db.Column(db.String(120), nullable=True)
@@ -232,10 +232,35 @@ def create_venue_submission():
 def delete_venue(venue_id):
     # TODO: Complete this endpoint for taking a venue_id, and using
     # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
+    # catch exceptions with try-except block
+    try:
+        # get venue, delete it, commit to db
+
+        venue = Venues.query.filter(Venues.id == venue_id).first()
+        # print('Venue', venue)
+        venue_name = venue.name
+
+        db.session.delete(venue)
+        db.session.commit()
+
+        # flash if successful delete
+        flash('Venue ' + venue_name + ' was successfully deleted.')
+    except:
+
+        print("Oops!", sys.exc_info()[0], "occured.")
+
+        db.session.rollback()
+
+        flash('An error occurred. Venue ' + venue_name + ' could not be deleted.')
+    finally:
+
+        db.session.close()
+
+    return jsonify({'success': True})
 
     # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
     # clicking that button delete it from the db then redirect the user to the homepage
-    return None
+
 
 
 #  Artists
