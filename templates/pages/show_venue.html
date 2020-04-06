@@ -94,8 +94,13 @@
           fetch('/venues/' + venueID, {
             method: 'DELETE'
 
-          });
-          console.log("click two")
+          })
+             .then(function () {
+                window.location.href = `/venues`;
+                 })
+            .catch(function (e) {
+                console.log('error', e)
+             })
     }
   }
 </script>

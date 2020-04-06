@@ -12,6 +12,7 @@ from forms import *
 from models import *
 import sys
 
+
 # ----------------------------------------------------------------------------#
 # App Config.
 # ----------------------------------------------------------------------------#
@@ -164,21 +165,19 @@ def create_venue_submission():
 def delete_venue(venue_id):
 
     try:
-        delete_venue = Venues.query.filter_by(id=venue_id).first()
+        delete_venue = Venues.query.filter(Venues.id == venue_id).first()
         db.session.delete(delete_venue)
         db.session.commit()
         flash('Venue  was successfully deleted.')
 
     except:
-
         db.session.rollback()
         print(sys.exc_info())
         flash('An error occurred. Venue could not be deleted.')
     finally:
         db.session.close()
         print("finally and at last")
-
-    return redirect(url_for('venues'))
+        return jsonify({'success': True})
 
 
 #  Artists
