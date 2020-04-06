@@ -159,41 +159,25 @@ def create_venue_submission():
 
     return render_template('pages/home.html')
 
-    # on successful db insert, flash success
-    # flash('Venue ' + request.form['name'] + ' was successfully listed!')
-    # TODO: on unsuccessful db insert, flash an error instead.
-    # e.g., flash('An error occurred. Venue ' + data.name + ' could not be listed.')
-    # see: http://flask.pocoo.org/docs/1.0/patterns/flashing/
-
 
 @app.route('/venues/<venue_id>', methods=['DELETE'])
 def delete_venue(venue_id):
-    # TODO: Complete this endpoint for taking a venue_id, and using
-    # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
-    # catch exceptions with try-except block
-    error = False
-    venue = Venues.query.filter_by(id=venue_id).first()
-    venue_name = venue.name
-    print(venue_name)
 
     try:
-        db.session.delete(venue)
+        delete_venue = Venues.query.filter_by(id=venue_id).first()
+        db.session.delete(delete_venue)
         db.session.commit()
-        print("somthing happened here")
+        flash('Venue  was successfully deleted.')
+
     except:
-        error = True
+
         db.session.rollback()
         print(sys.exc_info())
-
+        flash('An error occurred. Venue could not be deleted.')
     finally:
         db.session.close()
         print("finally and at last")
 
-    if error:
-        flash('An error occurred. Venue ' + venue_name + ' could not be deleted.')
-
-    else:
-        flash('Venue ' + venue_name + ' was successfully deleted.')
     return redirect(url_for('venues'))
 
 
@@ -278,8 +262,6 @@ def edit_artist(artist_id):
 
 @app.route('/artists/<int:artist_id>/edit', methods=['POST'])
 def edit_artist_submission(artist_id):
-    # TODO: take values from the form submitted, and update existing
-    # artist record with ID <artist_id> using the new attributes
 
     try:
         form = ArtistForm()
@@ -424,7 +406,6 @@ def create_shows():
 
 @app.route('/shows/create', methods=['POST'])
 def create_show_submission():
-
     try:
 
         form = ShowForm()
