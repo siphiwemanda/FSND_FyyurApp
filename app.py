@@ -45,6 +45,7 @@ class Venues(db.Model):  ###Parent
     website = db.Column(db.String(500), nullable=True)
     image_link = db.Column(db.String(500), nullable=True)
     facebook_link = db.Column(db.String(120), nullable=True)
+    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
     seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
     seeking_description = db.Column(db.String(), nullable=True)
     show = db.relationship('Show', backref='venueshowlink', lazy=True)
@@ -65,7 +66,7 @@ class Artist(db.Model):  ###Parent
     website = db.Column(db.String(500), nullable=True)
     image_link = db.Column(db.String(500), nullable=True)
     facebook_link = db.Column(db.String(120), nullable=True)
-    genres = db.Column(db.String(120))
+    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
     seeking_venue = db.Column(db.Boolean, nullable=True, default=True)
     seeking_description = db.Column(db.String(), nullable=True)
     show = db.relationship('Show', backref='artistshowlink', lazy=True)
@@ -120,7 +121,7 @@ def venues():
 
     areas = Venues.query.all()
 
-    return render_template('pages/venues.html', areas=areas, venues=Venues)
+    return render_template('pages/venues.html', areas=areas)
 
 
 @app.route('/venues/search', methods=['POST'])
@@ -132,8 +133,8 @@ def search_venues():
 
 @app.route('/venues/<int:venue_id>')
 def show_venue(venue_id):
+    form = VenueForm()
     venue = Venues.query.filter_by(id=venue_id).first()
-
     shows = Show.query.filter_by(venue_id=venue_id).all()
 
     def upcoming_shows():
@@ -165,7 +166,7 @@ def show_venue(venue_id):
     data = {
         "id": venue.id,
         "name": venue.name,
-        # "genres": venue.genres,
+        "genres": venue.genres,
         "address": venue.address,
         "city": venue.city,
         "state": venue.state,
@@ -180,7 +181,7 @@ def show_venue(venue_id):
         "past_shows_count": len(past_show()),
         "upcoming_shows_count": len(upcoming_shows())
     }
-    return render_template('pages/show_venue.html', venue=data)
+    return render_template('pages/show_venue.html', form=form, venue=data)
 
 
 #  Create Venue
@@ -194,30 +195,34 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-    # TODO: insert form data as a new Venue record in the db, instead
-    # TODO: modify data to be the data object returned from db insertion
-    error = False
-    form = VenueForm(request.form)
-    genres = request.form.getlist('genres')
-    venue = len(Venues.query.all())
-    venue += 1
+    # venue = len(Venues.query.all())
+    # v#enue += 1
     try:
-        print("hello")
-        venue = Venues(id=venue, name=form.name.data, city=form.city.data, state=form.state.data,
-                       phone=form.phone.data, address=form.address.data)
 
-        db.session.add(venue)
+        form = VenueForm()
+
+        name = form.name.data
+        city = form.city.data
+        state = form.state.data
+        phone = form.phone.data
+        genres = form.genres.data
+        facebook = form.facebook_link.data
+        address = form.address.data
+
+        new_venue = Venues(name=name, city=city, state=state,
+                           phone=phone, facebook_link=facebook, genres=genres, address=address)
+
+        db.session.add(new_venue)
         db.session.commit()
+        flash('Venue ' + form['name'].data + ' was successfully added!')
     except:
         error = True
         db.session.rollback()
         print(sys.exc_info())
+        flash('An error occurred. Venue ' +
+              request.form['name'] + ' could not be listed. ')
     finally:
         db.session.close()
-    if error:
-        flash('An error occurred. Venue ' + form.name.data + ' could not be listed.')
-    else:
-        flash('Venue ' + form['name'].data + ' was successfully added!')
 
     return render_template('pages/home.html')
 
@@ -269,24 +274,15 @@ def artists():
 
 @app.route('/artists/search', methods=['POST'])
 def search_artists():
-    # TODO: implement search on artists with partial string search. Ensure it is case-insensitive.
-    # seach for "A" should return "Guns N Petals", "Matt Quevado", and "The Wild Sax Band".
-    # search for "band" should return "The Wild Sax Band".
     search_term = request.form.get('search_term', '')
     artists_returned = Artist.query.filter(Artist.name.ilike('%' + search_term + '%'))
-    print(artists_returned)
-    # print(results)
-
     return render_template('pages/search_artists.html', results=artists_returned, search_term=search_term)
 
 
 @app.route('/artists/<int:artist_id>')
 def show_artist(artist_id):
-    # shows the venue page with the given venue_id
-    # TODO: replace with real venue data from the venues table, using venue_id
     form = ArtistForm()
     artist = Artist.query.filter_by(id=artist_id).first()
-
     shows = Show.query.filter_by(artist_id=artist_id).all()
 
     def upcoming_shows():
@@ -435,30 +431,32 @@ def create_artist_form():
 
 @app.route('/artists/create', methods=['POST'])
 def create_artist_submission():
-    # called upon submitting the new artist listing form
-    error = False
-    form = ArtistForm(request.form)
-    artist = len(Artist.query.all())
-    artist += 1
+    # artist = len(Artist.query.all())
+    # artist += 1
 
     try:
-        print("hello")
+        form = ArtistForm()
+        name = form.name.data
+        city = form.city.data
+        state = form.state.data
+        phone = form.phone.data
+        genres = form.genres.data
+        facebook = form.facebook_link.data
 
-        new_artist = Artist(id=artist, name=form.name.data, city=form.city.data, state=form.state.data,
-                            phone=form.phone.data)
+        new_artist = Artist(name=name, city=city, state=state,
+                            phone=phone, facebook_link=facebook, genres=genres)
+
+        print(new_artist.name, new_artist.id)
 
         db.session.add(new_artist)
         db.session.commit()
+        flash('Artist ' + form['name'].data + ' was successfully added!')
     except:
-        error = True
         db.session.rollback()
-        print(sys.exc_info())
+        flash('An error occurred. Artist ' +
+              request.form['name'] + ' could not be listed. ')
     finally:
         db.session.close()
-    if error:
-        flash('An error occurred. Artist ' + form.name.data + ' could not be listed.')
-    else:
-        flash('Artist ' + form['name'].data + ' was successfully added!')
 
     return render_template('pages/home.html')
 
