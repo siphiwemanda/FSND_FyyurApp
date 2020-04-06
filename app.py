@@ -165,7 +165,7 @@ def show_venue(venue_id):
     data = {
         "id": venue.id,
         "name": venue.name,
-        #"genres": venue.genres,
+        # "genres": venue.genres,
         "address": venue.address,
         "city": venue.city,
         "state": venue.state,
@@ -205,7 +205,7 @@ def create_venue_submission():
         print("hello")
         venue = Venues(id=venue, name=form.name.data, city=form.city.data, state=form.state.data,
                        phone=form.phone.data, address=form.address.data)
-        #
+
         db.session.add(venue)
         db.session.commit()
     except:
@@ -233,34 +233,30 @@ def delete_venue(venue_id):
     # TODO: Complete this endpoint for taking a venue_id, and using
     # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
     # catch exceptions with try-except block
+    error = False
+    venue = Venues.query.filter_by(id=venue_id).first()
+    venue_name = venue.name
+    print(venue_name)
+
     try:
-        # get venue, delete it, commit to db
-
-        venue = Venues.query.filter(Venues.id == venue_id).first()
-        # print('Venue', venue)
-        venue_name = venue.name
-
         db.session.delete(venue)
         db.session.commit()
-
-        # flash if successful delete
-        flash('Venue ' + venue_name + ' was successfully deleted.')
+        print("somthing happened here")
     except:
-
-        print("Oops!", sys.exc_info()[0], "occured.")
-
+        error = True
         db.session.rollback()
+        print(sys.exc_info())
 
-        flash('An error occurred. Venue ' + venue_name + ' could not be deleted.')
     finally:
-
         db.session.close()
+        print("finally and at last")
 
-    return jsonify({'success': True})
+    if error:
+        flash('An error occurred. Venue ' + venue_name + ' could not be deleted.')
 
-    # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
-    # clicking that button delete it from the db then redirect the user to the homepage
-
+    else:
+        flash('Venue ' + venue_name + ' was successfully deleted.')
+    return redirect(url_for('venues'))
 
 
 #  Artists
@@ -348,19 +344,6 @@ def edit_artist(artist_id):
     form = ArtistForm()
     artist = Artist.query.filter_by(id=artist_id).first()
 
-    artist = {
-        "id": artist.id,
-        "name": artist.name,
-        "genres": artist.genres,
-        "city": artist.city,
-        "state": artist.state,
-        "phone": artist.phone,
-        "website": artist.website,
-        "facebook_link": artist.facebook_link,
-        "seeking_description": artist.seeking_description,
-        "image_link": artist.image_link
-    }
-
     return render_template('forms/edit_artist.html', form=form, artist=artist)
 
 
@@ -369,27 +352,30 @@ def edit_artist_submission(artist_id):
     # TODO: take values from the form submitted, and update existing
     # artist record with ID <artist_id> using the new attributes
 
-    edit_artist = Artist.query.get(artist_id)
-    error = False
-    form = ArtistForm(request.form)
-
     try:
+        form = ArtistForm()
+        # get venue by id
+        edit_artist = Artist.query.get(artist_id)
 
-        edit_artist = Artist(name=form.name.data, city=form.city.data, state=form.state.data,
-                            phone=form.phone.data)
+        edit_artist.name = form.name.data
+        edit_artist.genres = form.genres.data
+        edit_artist.city = form.city.data
+        edit_artist.state = form.state.data
+        edit_artist.phone = form.phone.data
+        edit_artist.facebook_link = form.facebook_link.data
+
+        # commit changes, flash message if successful
 
         db.session.add(edit_artist)
         db.session.commit()
+        flash('Artist ' + request.form['name'] + ' was successfully updated!')
     except:
-        error = True
         db.session.rollback()
-        print(sys.exc_info())
+        flash('An error occurred. Artist ' +
+              request.form['name'] + ' could not be listed. ')
+
     finally:
         db.session.close()
-    if error:
-        flash('An error occurred. Artist ' + form.name.data + ' could not be listed.')
-    else:
-        flash('Artist ' + form['name'].data + ' was successfully added!')
 
     return redirect(url_for('show_artist', artist_id=artist_id))
 
@@ -405,36 +391,31 @@ def edit_venue(venue_id):
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
     # TODO: take values from the form submitted, and update existing
-
     # venue record with ID <venue_id> using the new attributes
 
     try:
         form = VenueForm()
         # get venue by id
-        edit_venue = Venues.query.filter_by(id=venue_id).first()
-
-        # load form data from user input
+        edit_venue = Venues.query.get(venue_id)
+        print(edit_venue.name)
         edit_venue.name = form.name.data
         edit_venue.genres = form.genres.data
         edit_venue.city = form.city.data
         edit_venue.state = form.state.data
         edit_venue.address = form.address.data
         edit_venue.phone = form.phone.data
-
         edit_venue.facebook_link = form.facebook_link.data
-        edit_venue.website = form.website.data
-        edit_venue.image_link = form.image_link.data
-        edit_venue.seeking_talent = True if form.seeking_talent.data == 'Yes' else False
-        edit_venue.seeking_description = form.seeking_description.data
 
         # commit changes, flash message if successful
+
+        db.session.add(edit_venue)
         db.session.commit()
         flash('Venue ' + request.form['name'] + ' was successfully updated!')
     except:
         # rollback session if error
         db.session.rollback()
         flash('An error occurred. Venue ' +
-              request.form['name'] + ' could not be listed. ' )
+              request.form['name'] + ' could not be listed. ')
 
     finally:
         # always close the session
@@ -487,7 +468,6 @@ def create_artist_submission():
 
 @app.route('/shows')
 def shows():
-
     Show_page = Show.query.all()
     Data = []
     # get venue and artist information for each show

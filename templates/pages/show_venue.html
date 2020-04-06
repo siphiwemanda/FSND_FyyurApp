@@ -44,8 +44,8 @@
 
       <div>
          <h3>
-              <a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg" data-id{{ venue.id }}>Edit Venue</button></a>
-             <a href="/venues/delete"><button class="btn btn-default btn-lg">Delete Venue</button></a>
+              <a href="/venues/{{ venue.id }}/edit"><button class="btn btn-primary btn-lg">Edit Venue</button></a>
+              <button class="btn btn-default btn-lg delete-button" data-id ="{{ venue.id }}">Delete Venue</button>
 
          </h3>
 
@@ -82,7 +82,25 @@
 		</div>
 		{% endfor %}
 	</div>
+
+<script>
+    const deleteVenue = document.getElementsByClassName("delete-button");
+
+      for (let i = 0; i < deleteVenue.length; i++) {
+        const button = deleteVenue[i];
+        button.onclick = function(e) {
+            console.log("click");
+          const venueID = e.target.dataset['id'];
+          fetch('/venues/' + venueID, {
+            method: 'DELETE'
+
+          });
+          console.log("click two")
+    }
+  }
+</script>
 </section>
 
 {% endblock %}
+
 
