@@ -2,21 +2,14 @@
 # Imports
 # ----------------------------------------------------------------------------#
 
-import json
+
 from datetime import datetime
 import dateutil.parser
 import babel
-from flask import Flask, abort, jsonify, render_template, request, Response, flash, redirect, url_for, session
-from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.dialects.postgresql import ARRAY
-from flask_migrate import Migrate
 import logging
 from logging import Formatter, FileHandler
-from flask_wtf import Form
-from sqlalchemy.sql import crud
-
 from forms import *
+from models import *
 import sys
 
 # ----------------------------------------------------------------------------#
@@ -27,64 +20,6 @@ moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-
-# ----------------------------------------------------------------------------#
-# Models.
-# ----------------------------------------------------------------------------#
-
-class Venues(db.Model):  ###Parent
-    __tablename__ = 'venue'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(120))
-    city = db.Column(db.String(120))
-    state = db.Column(db.String(120))
-    address = db.Column(db.String(120))
-    phone = db.Column(db.String(120))
-    website = db.Column(db.String(500), nullable=True)
-    image_link = db.Column(db.String(500), nullable=True)
-    facebook_link = db.Column(db.String(120), nullable=True)
-    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
-    seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
-    seeking_description = db.Column(db.String(), nullable=True)
-    show = db.relationship('Show', backref='venueshowlink', lazy=True)
-
-    def __repr__(self):
-        return f'<Venue {self.venue_id} {self.name}>'
-
-
-class Artist(db.Model):  ###Parent
-    __tablename__ = 'artist'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(120))
-    city = db.Column(db.String(120))
-    state = db.Column(db.String(120))
-    address = db.Column(db.String(120), nullable=True)
-    phone = db.Column(db.String(120), nullable=False)
-    website = db.Column(db.String(500), nullable=True)
-    image_link = db.Column(db.String(500), nullable=True)
-    facebook_link = db.Column(db.String(120), nullable=True)
-    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
-    seeking_venue = db.Column(db.Boolean, nullable=True, default=True)
-    seeking_description = db.Column(db.String(), nullable=True)
-    show = db.relationship('Show', backref='artistshowlink', lazy=True)
-
-    def __repr__(self):
-        return f'<Venue {self.id} {self.name}>'
-
-
-# TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
-# TODO create a foreign key that connects Show to artist and venue
-
-class Show(db.Model):  ###Child
-    __tablename__ = 'show'
-
-    id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime, nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 
 # ----------------------------------------------------------------------------#
