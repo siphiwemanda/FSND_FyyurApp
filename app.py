@@ -1,32 +1,15 @@
 # ----------------------------------------------------------------------------#
 # Imports
 # ----------------------------------------------------------------------------#
-
-
-from datetime import datetime
+import sys
 import dateutil.parser
 import babel
+from flask import (Flask, render_template, request, flash, redirect, url_for, jsonify)
 import logging
 from logging import Formatter, FileHandler
 from forms import *
-
-import sys
-from flask import Flask, abort, jsonify, render_template, request, Response, flash, redirect, url_for, session
-from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
-
-from flask_migrate import Migrate
-
-
-
-# ----------------------------------------------------------------------------#
-# App Config.
-# ----------------------------------------------------------------------------#
-app = Flask(__name__)
-moment = Moment(app)
-app.config.from_object('config')
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+from models import *
+from datetime import datetime
 
 
 # ----------------------------------------------------------------------------#
@@ -44,57 +27,6 @@ def format_datetime(value, format='medium'):
 
 app.jinja_env.filters['datetime'] = format_datetime
 
-
-
-class Venues(db.Model):  ###Parent
-    __tablename__ = 'venue'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(120))
-    city = db.Column(db.String(120))
-    state = db.Column(db.String(120))
-    address = db.Column(db.String(120))
-    phone = db.Column(db.String(120))
-    website = db.Column(db.String(500), nullable=True)
-    image_link = db.Column(db.String(500), nullable=True)
-    facebook_link = db.Column(db.String(120), nullable=True)
-    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
-    seeking_talent = db.Column(db.Boolean, nullable=True, default=True)
-    seeking_description = db.Column(db.String(), nullable=True)
-    show = db.relationship('Show', backref='venueshowlink', lazy=True)
-
-    def __repr__(self):
-        return f'<Venue {self.venue_id} {self.name}>'
-
-
-class Artist(db.Model):  ###Parent
-    __tablename__ = 'artist'
-
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(120))
-    city = db.Column(db.String(120))
-    state = db.Column(db.String(120))
-    address = db.Column(db.String(120), nullable=True)
-    phone = db.Column(db.String(120), nullable=False)
-    website = db.Column(db.String(500), nullable=True)
-    image_link = db.Column(db.String(500), nullable=True)
-    facebook_link = db.Column(db.String(120), nullable=True)
-    genres = db.Column("genres", db.ARRAY(db.String()), nullable=False)
-    seeking_venue = db.Column(db.Boolean, nullable=True, default=True)
-    seeking_description = db.Column(db.String(), nullable=True)
-    show = db.relationship('Show', backref='artistshowlink', lazy=True)
-
-    def __repr__(self):
-        return f'<Venue {self.id} {self.name}>'
-
-
-class Show(db.Model):  ###Child
-    __tablename__ = 'show'
-
-    id = db.Column(db.Integer, primary_key=True)
-    start_time = db.Column(db.DateTime, nullable=False)
-    artist_id = db.Column(db.Integer, db.ForeignKey('artist.id'))
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 # ----------------------------------------------------------------------------#
 # Controllers.
@@ -186,8 +118,7 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-    # venue = len(Venues.query.all())
-    # v#enue += 1
+
     try:
 
         form = VenueForm()
@@ -207,7 +138,6 @@ def create_venue_submission():
         db.session.commit()
         flash('Venue ' + form['name'].data + ' was successfully added!')
     except:
-        error = True
         db.session.rollback()
         print(sys.exc_info())
         flash('An error occurred. Venue ' +
@@ -220,16 +150,15 @@ def create_venue_submission():
 
 @app.route('/venues/<venue_id>', methods=['DELETE'])
 def delete_venue(venue_id):
-
     try:
         delete_venue = Venues.query.filter(Venues.id == venue_id).first()
-        #delete_shows = Show.query.filter_by(venue_id=venue_id).all()
+        # delete_shows = Show.query.filter_by(venue_id=venue_id).all()
         venue_name = delete_venue.name
-       # shows = delete_shows.id
+        # shows = delete_shows.id
         print(shows)
         print(venue_name)
         db.session.delete(delete_venue)
-       # db.session.delete(delete_shows)
+        # db.session.delete(delete_shows)
         db.session.commit()
         flash(venue_name + '  was successfully deleted.')
 
@@ -324,7 +253,6 @@ def edit_artist(artist_id):
 
 @app.route('/artists/<int:artist_id>/edit', methods=['POST'])
 def edit_artist_submission(artist_id):
-
     try:
         form = ArtistForm()
         edit_artist = Artist.query.get(artist_id)
@@ -361,7 +289,6 @@ def edit_venue(venue_id):
 
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
-
     try:
         form = VenueForm()
         edit_venue = Venues.query.get(venue_id)
@@ -386,7 +313,7 @@ def edit_venue_submission(venue_id):
               request.form['name'] + ' could not be listed. ')
 
     finally:
-        # always close the session
+        # close the session
         db.session.close()
 
     return redirect(url_for('show_venue', venue_id=venue_id))
@@ -403,8 +330,7 @@ def create_artist_form():
 
 @app.route('/artists/create', methods=['POST'])
 def create_artist_submission():
-    # artist = len(Artist.query.all())
-    # artist += 1
+
 
     try:
         form = ArtistForm()
@@ -471,7 +397,6 @@ def create_show_submission():
         start_time = form.start_time.data
         print("hello")
         new_show = Show(artist_id=artist_id, venue_id=venue_id, start_time=start_time)
-        #
         db.session.add(new_show)
         db.session.commit()
         flash('Show  was successfully added!')

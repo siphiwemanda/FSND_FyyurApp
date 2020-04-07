@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86006490-a7c0-4eab-9c3e-506d36dbd688" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
@@ -162,7 +163,7 @@
       <workItem from="1586074972528" duration="30218000" />
       <workItem from="1586203216948" duration="5636000" />
       <workItem from="1586245335168" duration="973000" />
-      <workItem from="1586247804167" duration="3482000" />
+      <workItem from="1586247804167" duration="4486000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -388,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586249476926</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="refactoring">
+      <created>1586251565302</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1586251565302</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -408,7 +416,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Show table" />
     <MESSAGE value="Added real table data for venues" />
     <MESSAGE value="An actual mess" />
     <MESSAGE value="Venue half working, artist half working" />
@@ -433,7 +440,8 @@
     <MESSAGE value="tidy up" />
     <MESSAGE value="error is catching on delete" />
     <MESSAGE value="returned models to same page delete working for venues." />
-    <option name="LAST_COMMIT_MESSAGE" value="returned models to same page delete working for venues." />
+    <MESSAGE value="refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactoring" />
   </component>
   <component name="WindowStateProjectService">
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1583072269458">
@@ -444,14 +452,18 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="693" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586248867535" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586249476774">
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586251565109">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504389263" />
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741@0.27.1366.741" timestamp="1586207178228" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586249476774" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586251565109" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
+    <state x="179" y="107" width="1536" height="879" key="DiffContextDialog" timestamp="1586251544957">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="179" y="107" width="1536" height="879" key="DiffContextDialog/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586251544957" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -521,12 +533,12 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state width="263" height="541" key="HiddenNamespacesPopup/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583076793197" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586249482007">
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2" timestamp="1586251567165">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="395" y="199" key="Vcs.Push.Dialog.v2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504391073" />
     <state x="395" y="199" key="Vcs.Push.Dialog.v2/0.27.1366.741@0.27.1366.741" timestamp="1586207181480" />
-    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586249482007" />
+    <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586251567165" />
     <state x="555" y="272" width="800" height="543" key="Vcs.Push.Dialog.v2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077188419" />
     <state x="92" y="120" width="1720" height="853" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1585471585371">
       <screen x="0" y="27" width="1920" height="1053" />
