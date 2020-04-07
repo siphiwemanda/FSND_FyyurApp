@@ -4,8 +4,7 @@
     <list default="true" id="86006490-a7c0-4eab-9c3e-506d36dbd688" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/show_artist.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/show_artist.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +163,7 @@
       <workItem from="1586074972528" duration="30218000" />
       <workItem from="1586203216948" duration="5636000" />
       <workItem from="1586245335168" duration="973000" />
-      <workItem from="1586247804167" duration="755000" />
+      <workItem from="1586247804167" duration="1626000" />
     </task>
     <task id="LOCAL-00001" summary="Updated to local server, updated migration files">
       <created>1583074273466</created>
@@ -376,7 +375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586207178631</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="error is catching on delete">
+      <created>1586248731224</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1586248731224</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,12 +434,16 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="555" y="201" width="800" height="684" key="#com.intellij.execution.impl.EditConfigurationsDialog/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583072269458" />
-    <state x="370" y="42" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586207178228">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="693" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586248867535">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="693" y="302" width="524" height="509" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586248867535" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2" timestamp="1586248731023">
+      <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741/1920.0.1366.768@0.27.1366.741" timestamp="1585504389263" />
     <state x="370" y="42" key="CommitChangelistDialog2/0.27.1366.741@0.27.1366.741" timestamp="1586207178228" />
-    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586196661096" />
+    <state x="520" y="49" width="864" height="989" key="CommitChangelistDialog2/0.27.1920.1053/1920.0.1366.768@0.27.1920.1053" timestamp="1586248731023" />
     <state x="520" y="49" key="CommitChangelistDialog2/0.27.1920.1053@0.27.1920.1053" timestamp="1585045816620" />
     <state x="520" y="49" width="869" height="989" key="CommitChangelistDialog2/1920.0.1366.768/0.27.1920.1053@0.27.1920.1053" timestamp="1583077185375" />
     <state x="743" y="298" width="374" height="359" key="FileChooserDialogImpl" timestamp="1585231792115">
