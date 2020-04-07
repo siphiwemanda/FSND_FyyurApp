@@ -166,14 +166,15 @@ def delete_venue(venue_id):
 
     try:
         delete_venue = Venues.query.filter(Venues.id == venue_id).first()
+        venue_name = delete_venue.name
         db.session.delete(delete_venue)
         db.session.commit()
-        flash('Venue  was successfully deleted.')
+        flash(venue_name + '  was successfully deleted.')
 
     except:
         db.session.rollback()
         print(sys.exc_info())
-        flash('An error occurred. Venue could not be deleted.')
+        flash('An error occurred.  ' + venue_name + '  could not be deleted.')
     finally:
         db.session.close()
         print("finally and at last")
@@ -264,9 +265,7 @@ def edit_artist_submission(artist_id):
 
     try:
         form = ArtistForm()
-        # get venue by id
         edit_artist = Artist.query.get(artist_id)
-
         edit_artist.name = form.name.data
         edit_artist.genres = form.genres.data
         edit_artist.city = form.city.data
@@ -300,12 +299,9 @@ def edit_venue(venue_id):
 
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
-    # TODO: take values from the form submitted, and update existing
-    # venue record with ID <venue_id> using the new attributes
 
     try:
         form = VenueForm()
-        # get venue by id
         edit_venue = Venues.query.get(venue_id)
         print(edit_venue.name)
         edit_venue.name = form.name.data
